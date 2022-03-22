@@ -25,7 +25,9 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                     .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                    .permitAll();
+                    .permitAll()
+                .and()
+                	.cors().and().csrf().disable();
     }
 
     @Override

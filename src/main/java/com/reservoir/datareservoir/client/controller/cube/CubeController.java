@@ -1,21 +1,33 @@
 package com.reservoir.datareservoir.client.controller.cube;
 
-import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
-import com.reservoir.datareservoir.client.domain.service.CubeDataService;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
+
+import com.reservoir.datareservoir.client.domain.model.CubeData;
+import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
+import com.reservoir.datareservoir.client.domain.service.CubeDataService;
 
 @Controller
 @RequestMapping("/cube")
 public class CubeController {
+	
+	private CubeData[] cubeDataList;
 
     @GetMapping
     public ModelAndView getCube(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/cubeHome");
-        modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
+        cubeDataList = CubeDataService.getCubeData(propertiesFilter);
+        modelAndView.addObject("cubeData", cubeDataList);
 
         return modelAndView;
     }
@@ -23,8 +35,23 @@ public class CubeController {
     @PostMapping
     public ModelAndView postCube(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/cubeHome");
-        modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
+        cubeDataList = CubeDataService.getCubeData(propertiesFilter);
+        modelAndView.addObject("cubeData", cubeDataList);
 
         return modelAndView;
+    }
+    
+    @GetMapping("/download")
+    public void downloadCsv(HttpServletResponse response) throws IOException {
+    	response.setContentType("application/octet-stream");
+    	String headerKey = "Content-Disposition";
+    	String headerValue = "attachment; filename=cubeData.csv";
+    	
+    	response.setHeader(headerKey, headerValue);
+    	
+    	ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+		CubeDataService.downloadCsv(csvBeanWriter, cubeDataList);
+		csvBeanWriter.close();
+    	
     }
 }
