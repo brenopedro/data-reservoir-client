@@ -5,8 +5,7 @@
     <div th:replace="/cube/tabs/batteryCurrent/batteryCurrent::layout"></div>
 
     <div class="col" style="margin-left: 5px; margin-top: 5px">
-        <div th:replace="/layout/fragments/FormPropertiesFilter::filter (${propertiesFilter})">
-        </div>
+        <div th:replace="/layout/fragments/FormPropertiesFilter::filter (${propertiesFilter})"></div>
         <canvas id="chart" class="row-cols-4"></canvas>
         <button class="row-cols-1 btn btn-primary" type="button" id="button" style="margin-left: 5px">Refresh</button>
     </div>

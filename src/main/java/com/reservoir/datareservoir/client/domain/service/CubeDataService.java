@@ -20,7 +20,7 @@ import com.reservoir.datareservoir.client.domain.model.UrlEnum;
 public class CubeDataService {
 
     public static CubeData[] getCubeData(PropertiesFilter propertiesFilter) {
-        String accessToken = AuthorizationToken.getAccessToken();
+        String accessToken = AuthorizationToken.getAccessToken(false);
         CubeData[] cubeData;
 
         Map<String, String> params = new HashMap<>();
@@ -40,7 +40,7 @@ public class CubeDataService {
             cubeData = new RestTemplate().exchange(uri, HttpMethod.GET,
                             request, CubeData[].class, params).getBody();
         } catch (HttpClientErrorException e) {
-            accessToken = AuthorizationToken.useRefreshToken();
+            accessToken = AuthorizationToken.getAccessToken(true);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setBearerAuth(accessToken);

@@ -18,22 +18,14 @@ public class AuthorizationToken {
     private static String accessToken;
     private static TokenModel tokenModel;
 
-    public static String getAccessToken() {
-        if (accessToken == null) {
-            accessToken = getToken();
+    public static String getAccessToken(boolean expired) {
+        if (accessToken == null || expired) {
+            accessToken = getNewToken();
         }
         return accessToken;
     }
 
-    public static String useRefreshToken() {
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("grant_type", "refresh_token");
-        map.add("refresh_token", tokenModel.getRefresh_token());
-
-        return getToken(map);
-    }
-
-    private static String getToken() {
+    private static String getNewToken() {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("grant_type", "password");
         map.add("username", "brenoAdmin");
