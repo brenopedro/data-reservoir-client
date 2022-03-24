@@ -13,12 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class CubeBatteryTemperatureController {
 
     @GetMapping
-    public ModelAndView cubeBatteryCurrent() {
+    public ModelAndView cubeBatteryTemperature() {
         return new ModelAndView("cube/tabs/batteryTemperature/batteryTemperature");
     }
 
     @GetMapping("/table")
-    public ModelAndView getCubeBatteryCurrentTable(PropertiesFilter propertiesFilter) {
+    public ModelAndView getCubeBatteryTemperatureTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryTemperature/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
 
@@ -26,7 +26,7 @@ public class CubeBatteryTemperatureController {
     }
 
     @PostMapping("/table")
-    public ModelAndView postCubeBatteryCurrentTable(PropertiesFilter propertiesFilter) {
+    public ModelAndView postCubeBatteryTemperatureTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryTemperature/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
 
@@ -34,7 +34,7 @@ public class CubeBatteryTemperatureController {
     }
 
     @GetMapping("/graph")
-    public ModelAndView getCubeBatteryCurrentGraph(PropertiesFilter propertiesFilter) {
+    public ModelAndView getCubeBatteryTemperatureGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryTemperature/graph");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
 
@@ -42,7 +42,7 @@ public class CubeBatteryTemperatureController {
     }
 
     @PostMapping("/graph")
-    public ModelAndView postCubeBatteryCurrentGraph(PropertiesFilter propertiesFilter) {
+    public ModelAndView postCubeBatteryTemperatureGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryTemperature/graph");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
         return modelAndView;

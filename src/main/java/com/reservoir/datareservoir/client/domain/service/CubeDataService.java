@@ -56,7 +56,7 @@ public class CubeDataService {
     }
 
 	public static void downloadCsv(ICsvBeanWriter csvBeanWriter, CubeData[] cubeDataList) throws IOException {
-		String[] header = {"External Temperature", "Battery Current", "Battery Voltage", "Battery Temperature",
+		String[] header = {"ID", "External Temperature", "Battery Current", "Battery Voltage", "Battery Temperature",
 				"Magnetic Field X", "Magnetic Field Y", "Magnetic Field Z",
 				"Euler Angle X", "Euler Angle Y", "Euler Angle Z",
 				"Linear Speed X", "Linear Speed Y", "Linear Speed Z",
@@ -64,7 +64,7 @@ public class CubeDataService {
 				"Transmitted Transciever Power", "Received Transceiver Power",
 				"Time Stamp Cube", "Time Stamp Base"};
 
-		String[] fieldMapping = {"externalTemperature", "batteryCurrent", "batteryVoltage", "batteryTemperature",
+		String[] fieldMapping = {"id", "externalTemperature", "batteryCurrent", "batteryVoltage", "batteryTemperature",
 						"magneticFieldX", "magneticFieldY", "magneticFieldY",
 						"eulerAngleX", "eulerAngleY", "eulerAngleZ",
 						"linearSpeedX", "linearSpeedY", "linearSpeedZ",

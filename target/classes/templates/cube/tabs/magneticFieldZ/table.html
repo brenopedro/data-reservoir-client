@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/cube/cubeHome::header"></head>
 <body>
-    <div th:replace="/cube/tabs/batteryTemperature/batteryTemperature::layout"></div>
+    <div th:replace="/cube/tabs/magneticFieldZ/magneticFieldZ::layout"></div>
 
     <div class="col" style="margin-left: 5px; margin-top: 5px">
         <div th:replace="/layout/fragments/FormPropertiesFilter::filter (${propertiesFilter})"></div>
@@ -11,14 +11,14 @@
                 <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Battery Temperature</th>
+                    <th>Magnetic Field Y</th>
                     <th>Time stamp cube</th>
                     <th>Time stamp base</th>
                 </tr>
                 </thead>
                 <tr th:each="cubeData: ${cubeData}">
                     <th th:text="${cubeData.id}">Id</th>
-                    <th th:text="${cubeData.batteryTemperature}">Battery Temperature</th>
+                    <th th:text="${cubeData.magneticFieldZ}">Magnetic Field Z</th>
                     <th th:text="${cubeData.timeStampCube}">Time stamp cube</th>
                     <th th:text="${cubeData.timeStampBase}">Time stamp base</th>
                 </tr>
@@ -30,7 +30,7 @@
     <block th:replace="/home::scripts"></block>
     <script>
         $('#nav-cube').addClass('active');
-        $('#batteryTemperature').addClass('active');
+        $('#magneticFieldZ').addClass('active');
         $('#table').addClass('active');
     </script>
 </body>

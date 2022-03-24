@@ -13,12 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class CubeBatteryVoltageController {
 
     @GetMapping
-    public ModelAndView cubeBatteryCurrent() {
+    public ModelAndView cubeBatteryVoltage() {
         return new ModelAndView("cube/tabs/batteryVoltage/batteryVoltage");
     }
 
     @GetMapping("/table")
-    public ModelAndView getCubeBatteryCurrentTable(PropertiesFilter propertiesFilter) {
+    public ModelAndView getCubeBatteryVoltageTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryVoltage/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
 
@@ -26,7 +26,7 @@ public class CubeBatteryVoltageController {
     }
 
     @PostMapping("/table")
-    public ModelAndView postCubeBatteryCurrentTable(PropertiesFilter propertiesFilter) {
+    public ModelAndView postCubeBatteryVoltageTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryVoltage/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
 
@@ -34,7 +34,7 @@ public class CubeBatteryVoltageController {
     }
 
     @GetMapping("/graph")
-    public ModelAndView getCubeBatteryCurrentGraph(PropertiesFilter propertiesFilter) {
+    public ModelAndView getCubeBatteryVoltageGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryVoltage/graph");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
 
@@ -42,7 +42,7 @@ public class CubeBatteryVoltageController {
     }
 
     @PostMapping("/graph")
-    public ModelAndView postCubeBatteryCurrentGraph(PropertiesFilter propertiesFilter) {
+    public ModelAndView postCubeBatteryVoltageGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryVoltage/graph");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
         return modelAndView;
