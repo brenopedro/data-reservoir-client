@@ -21,7 +21,6 @@ public class CubeExternalTemperatureController {
     public ModelAndView getExternalTemperatureTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/externalTemperature/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-
         return modelAndView;
     }
 
@@ -29,7 +28,6 @@ public class CubeExternalTemperatureController {
     public ModelAndView postExternalTemperatureTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/externalTemperature/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-
         return modelAndView;
     }
 
@@ -37,7 +35,6 @@ public class CubeExternalTemperatureController {
     public ModelAndView getExternalTemperatureGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/externalTemperature/graph");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-
         return modelAndView;
     }
 

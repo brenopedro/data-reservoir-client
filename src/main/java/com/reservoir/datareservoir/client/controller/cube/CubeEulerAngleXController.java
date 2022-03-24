@@ -9,38 +9,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/cube/battery-current")
-public class CubeBatteryCurrentController {
+@RequestMapping("/cube/euler-angle-x")
+public class CubeEulerAngleXController {
 
     @GetMapping
-    public ModelAndView cubeBatteryCurrent() {
-        return new ModelAndView("cube/tabs/batteryCurrent/batteryCurrent");
+    public ModelAndView cubeEulerAngleX() {
+        return new ModelAndView("cube/tabs/eulerAngleX/eulerAngleX");
     }
 
     @GetMapping("/table")
-    public ModelAndView getCubeBatteryCurrentTable(PropertiesFilter propertiesFilter) {
-        ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryCurrent/table");
+    public ModelAndView getCubeEulerAngleXTable(PropertiesFilter propertiesFilter) {
+        ModelAndView modelAndView = new ModelAndView("cube/tabs/eulerAngleX/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/table")
-    public ModelAndView postCubeBatteryCurrentTable(PropertiesFilter propertiesFilter) {
-        ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryCurrent/table");
+    public ModelAndView postCubeEulerAngleXTable(PropertiesFilter propertiesFilter) {
+        ModelAndView modelAndView = new ModelAndView("cube/tabs/eulerAngleX/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
         return modelAndView;
     }
 
     @GetMapping("/graph")
-    public ModelAndView getCubeBatteryCurrentGraph(PropertiesFilter propertiesFilter) {
-        ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryCurrent/graph");
+    public ModelAndView getCubeEulerAngleXGraph(PropertiesFilter propertiesFilter) {
+        ModelAndView modelAndView = new ModelAndView("cube/tabs/eulerAngleX/graph");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/graph")
-    public ModelAndView postCubeBatteryCurrentGraph(PropertiesFilter propertiesFilter) {
-        ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryCurrent/graph");
+    public ModelAndView postCubeEulerAngleXGraph(PropertiesFilter propertiesFilter) {
+        ModelAndView modelAndView = new ModelAndView("cube/tabs/eulerAngleX/graph");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
         return modelAndView;
     }

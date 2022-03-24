@@ -10,6 +10,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ClientExceptionHandler extends ResponseEntityExceptionHandler {
 	
+	// TODO: create exception handlers for another exceptions and resolve for a page
+	
 	@ExceptionHandler(ConnectException.class)
 	public ResponseEntity<String> handleConnectException(ConnectException e) {
 		return ResponseEntity.badRequest().body(e.getMessage());

@@ -21,7 +21,6 @@ public class CubeBatteryTemperatureController {
     public ModelAndView getCubeBatteryTemperatureTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryTemperature/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-
         return modelAndView;
     }
 
@@ -29,7 +28,6 @@ public class CubeBatteryTemperatureController {
     public ModelAndView postCubeBatteryTemperatureTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryTemperature/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-
         return modelAndView;
     }
 
@@ -37,7 +35,6 @@ public class CubeBatteryTemperatureController {
     public ModelAndView getCubeBatteryTemperatureGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryTemperature/graph");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-
         return modelAndView;
     }
 

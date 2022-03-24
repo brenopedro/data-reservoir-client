@@ -21,7 +21,6 @@ public class CubeMagneticFieldXController {
     public ModelAndView getMagneticFieldXTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/magneticFieldX/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-
         return modelAndView;
     }
 
@@ -29,7 +28,6 @@ public class CubeMagneticFieldXController {
     public ModelAndView postMagneticFieldXTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/magneticFieldX/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-
         return modelAndView;
     }
 
@@ -37,7 +35,6 @@ public class CubeMagneticFieldXController {
     public ModelAndView getMagneticFieldXGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/magneticFieldX/graph");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-
         return modelAndView;
     }
 

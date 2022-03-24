@@ -28,7 +28,6 @@ public class CubeController {
         ModelAndView modelAndView = new ModelAndView("cube/cubeHome");
         cubeDataList = CubeDataService.getCubeData(propertiesFilter);
         modelAndView.addObject("cubeData", cubeDataList);
-
         return modelAndView;
     }
 
@@ -37,7 +36,6 @@ public class CubeController {
         ModelAndView modelAndView = new ModelAndView("cube/cubeHome");
         cubeDataList = CubeDataService.getCubeData(propertiesFilter);
         modelAndView.addObject("cubeData", cubeDataList);
-
         return modelAndView;
     }
     

@@ -21,7 +21,6 @@ public class CubeBatteryVoltageController {
     public ModelAndView getCubeBatteryVoltageTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryVoltage/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-
         return modelAndView;
     }
 
@@ -29,7 +28,6 @@ public class CubeBatteryVoltageController {
     public ModelAndView postCubeBatteryVoltageTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryVoltage/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-
         return modelAndView;
     }
 
@@ -37,7 +35,6 @@ public class CubeBatteryVoltageController {
     public ModelAndView getCubeBatteryVoltageGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/tabs/batteryVoltage/graph");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-
         return modelAndView;
     }
 
