@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/cube/cubeHome::header"></head>
 <body>
-    <div th:replace="/cube/tabs/batteryCurrent/batteryCurrent::layout"></div>
+    <div th:replace="/cube/tabs/batteryVoltage/batteryVoltage::layout"></div>
 
     <div class="col" style="margin-left: 5px; margin-top: 5px">
         <div th:replace="/layout/fragments/FormPropertiesFilter::filter (${propertiesFilter})"></div>
@@ -11,14 +11,14 @@
                 <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Battery Current</th>
+                    <th>Battery Voltage</th>
                     <th>Time stamp cube</th>
                     <th>Time stamp base</th>
                 </tr>
                 </thead>
                 <tr th:each="cubeData: ${cubeData}">
                     <th th:text="${cubeData.id}">Id</th>
-                    <th th:text="${cubeData.batteryCurrent}">Battery Current</th>
+                    <th th:text="${cubeData.batteryVoltage}">Battery Voltage</th>
                     <th th:text="${cubeData.timeStampCube}">Time stamp cube</th>
                     <th th:text="${cubeData.timeStampBase}">Time stamp base</th>
                 </tr>
@@ -30,7 +30,7 @@
     <block th:replace="/home::scripts"></block>
     <script>
         $('#nav-cube').addClass('active');
-        $('#batteryCurrent').addClass('active');
+        $('#batteryVoltage').addClass('active');
         $('#table').addClass('active');
     </script>
 </body>

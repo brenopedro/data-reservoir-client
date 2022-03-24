@@ -5,13 +5,13 @@
     <div th:fragment="layout">
         <div th:replace="/layout/fragments/NavBar::navbar"></div>
         <div th:replace="/cube/cubeHome::tabs"></div>
-        <div th:replace="/layout/fragments/GraphTableTabs::tabs('external-temperature/graph', 'external-temperature/table')"></div>
+        <div th:replace="/layout/fragments/GraphTableTabs::tabs('battery-voltage/graph', 'battery-voltage/table')"></div>
     </div>
 
     <block th:replace="/home::scripts"></block>
     <script>
         $('#nav-cube').addClass('active');
-        $('#externalTemperature').addClass('active');
+        $('#batteryVoltage').addClass('active');
     </script>
 </body>
 </html>
