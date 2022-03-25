@@ -9,38 +9,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/cube/linear-speed-z")
-public class CubeLinearSpeedZController {
+@RequestMapping("/cube/angular-speed-z")
+public class CubeAngularSpeedZController {
 
     @GetMapping
-    public ModelAndView cubeLinearSpeedZ() {
-        return new ModelAndView("cube/tabs/linearSpeedZ/linearSpeedZ");
+    public ModelAndView cubeAngularSpeedZ() {
+        return new ModelAndView("cube/tabs/angularSpeedZ/angularSpeedZ");
     }
 
     @GetMapping("/table")
-    public ModelAndView getCubeLinearSpeedZTable(PropertiesFilter propertiesFilter) {
-        ModelAndView modelAndView = new ModelAndView("cube/tabs/linearSpeedZ/table");
+    public ModelAndView getCubeAngularSpeedZTable(PropertiesFilter propertiesFilter) {
+        ModelAndView modelAndView = new ModelAndView("cube/tabs/angularSpeedZ/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/table")
-    public ModelAndView postCubeLinearSpeedZTable(PropertiesFilter propertiesFilter) {
-        ModelAndView modelAndView = new ModelAndView("cube/tabs/linearSpeedZ/table");
+    public ModelAndView postCubeAngularSpeedZTable(PropertiesFilter propertiesFilter) {
+        ModelAndView modelAndView = new ModelAndView("cube/tabs/angularSpeedZ/table");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
         return modelAndView;
     }
 
     @GetMapping("/graph")
-    public ModelAndView getCubeLinearSpeedZGraph(PropertiesFilter propertiesFilter) {
-        ModelAndView modelAndView = new ModelAndView("cube/tabs/linearSpeedZ/graph");
+    public ModelAndView getCubeAngularSpeedZGraph(PropertiesFilter propertiesFilter) {
+        ModelAndView modelAndView = new ModelAndView("cube/tabs/angularSpeedZ/graph");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/graph")
-    public ModelAndView postCubeLinearSpeedZGraph(PropertiesFilter propertiesFilter) {
-        ModelAndView modelAndView = new ModelAndView("cube/tabs/linearSpeedZ/graph");
+    public ModelAndView postCubeAngularSpeedZGraph(PropertiesFilter propertiesFilter) {
+        ModelAndView modelAndView = new ModelAndView("cube/tabs/angularSpeedZ/graph");
         modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
         return modelAndView;
     }
