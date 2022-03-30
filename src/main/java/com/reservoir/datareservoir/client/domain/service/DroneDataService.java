@@ -5,7 +5,9 @@ import com.reservoir.datareservoir.client.domain.model.DroneData;
 import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
 import com.reservoir.datareservoir.client.domain.model.UrlEnum;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.springframework.http.HttpEntity;
@@ -14,6 +16,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.supercsv.io.ICsvBeanWriter;
 
 public class DroneDataService {
 
@@ -52,4 +55,20 @@ public class DroneDataService {
 
         return droneData;
     }
+
+	public static void downloadCsv(ICsvBeanWriter csvBeanWriter, DroneData[] droneDataList) throws IOException {
+		String[]  header = {"ID", "Altitude", "Battery Current", "Battery Voltage",
+				"Position GPS X", "Position GPS Y", "Postion GPS Z", 
+				"Time Stamp Drone", "Time Stamp Base"};
+		
+		String[] fieldMapping = {"id", "batteryCurrent", "batteryVoltage", 
+				"positionGpsX", "positionGpsY", "positionGpsZ", 
+				"timeStampDrone", "timeStampBase"};
+		
+		csvBeanWriter.writeHeader(header);
+		
+		for (DroneData droneData: droneDataList) {
+			csvBeanWriter.write(droneData, fieldMapping);
+		}
+	}
 }
