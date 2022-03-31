@@ -1,4 +1,4 @@
-package com.reservoir.datareservoir.client.controller.drone;
+package com.reservoir.datareservoir.client.controller.rocket;
 
 import java.io.IOException;
 
@@ -13,29 +13,29 @@ import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
 
-import com.reservoir.datareservoir.client.domain.model.DroneData;
 import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
-import com.reservoir.datareservoir.client.domain.service.DroneDataService;
+import com.reservoir.datareservoir.client.domain.model.RocketData;
+import com.reservoir.datareservoir.client.domain.service.RocketDataService;
 
 @Controller
-@RequestMapping("/drone")
-public class DroneController {
+@RequestMapping("/rocket")
+public class RocketController {
 	
-	private DroneData[] droneDataList;
+	private RocketData[] rocketDataList;
 
     @GetMapping
-    public ModelAndView getDrone(PropertiesFilter propertiesFilter) {
-        ModelAndView modelAndView = new ModelAndView("drone/droneHome");
-        droneDataList = DroneDataService.getDroneData(propertiesFilter);
-        modelAndView.addObject("droneData", droneDataList);
+    public ModelAndView getRocket(PropertiesFilter propertiesFilter) {
+        ModelAndView modelAndView = new ModelAndView("rocket/rocketHome");
+        rocketDataList = RocketDataService.getRocketData(propertiesFilter);
+        modelAndView.addObject("rocketData", rocketDataList);
         return modelAndView;
     }
 
     @PostMapping
-    public ModelAndView postDrone(PropertiesFilter propertiesFilter) {
-        ModelAndView modelAndView = new ModelAndView("drone/droneHome");
-        droneDataList = DroneDataService.getDroneData(propertiesFilter);
-        modelAndView.addObject("droneData", droneDataList);
+    public ModelAndView postRocket(PropertiesFilter propertiesFilter) {
+        ModelAndView modelAndView = new ModelAndView("rocket/rocketHome");
+        rocketDataList = RocketDataService.getRocketData(propertiesFilter);
+        modelAndView.addObject("rocketData", rocketDataList);
         return modelAndView;
     }
     
@@ -43,12 +43,12 @@ public class DroneController {
     public void downloadCsv(HttpServletResponse response) throws IOException {
     	response.setContentType("application/octet-stream");
     	String headerKey = "Content-Disposition";
-    	String headerValue = "attachment; filename=droneData.csv";
+    	String headerValue = "attachment; filename=rocketData.csv";
     	
     	response.setHeader(headerKey, headerValue);
     	
     	ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-		DroneDataService.downloadCsv(csvBeanWriter, droneDataList);
+		RocketDataService.downloadCsv(csvBeanWriter, rocketDataList);
 		csvBeanWriter.close();
     	
     }

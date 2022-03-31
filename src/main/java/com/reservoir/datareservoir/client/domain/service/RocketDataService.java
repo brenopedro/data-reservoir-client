@@ -1,10 +1,6 @@
 package com.reservoir.datareservoir.client.domain.service;
 
-import com.reservoir.datareservoir.client.config.auth.AuthorizationToken;
-import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
-import com.reservoir.datareservoir.client.domain.model.RocketData;
-import com.reservoir.datareservoir.client.domain.model.UrlEnum;
-
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +10,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.supercsv.io.ICsvBeanWriter;
+
+import com.reservoir.datareservoir.client.config.auth.AuthorizationToken;
+import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
+import com.reservoir.datareservoir.client.domain.model.RocketData;
+import com.reservoir.datareservoir.client.domain.model.UrlEnum;
 
 public class RocketDataService {
 
@@ -51,4 +53,29 @@ public class RocketDataService {
 
         return rocketData;
     }
+
+	public static void downloadCsv(ICsvBeanWriter csvBeanWriter, RocketData[] rocketDataList) throws IOException {
+		String[] header = {"ID", "Altitude", "External Temperature", "Acceleration", 
+				"Euler Angle X", "Euler Angle Y", "Euler Angle Z", 
+				"Position Gps X", "Position Gps Y", "Position Gps Z", 
+				"Magnetic Field X", "Magnetic Field Y", "Magnetic Field Z", 
+				"Linear Speed X", "Linear Speed Y", "Linear Speed Z", 
+				"Angular Speed X", "Angular Speed Y", "Angular Speed Z", 
+				"Time Stamp Rocket", "Time Stamp Base"};
+		
+		String[] fieldMapping = {"id", "altitude", "externalTemperature", "acceleration", 
+				"eulerAngleX", "eulerAngleY", "eulerAngleZ", 
+				"positionGpsX", "positionGpsY", "positionGpsZ", 
+				"magneticFieldX", "magneticFieldY", "magneticFieldZ", 
+				"linearSpeedX", "linearSpeedY", "linearSpeedZ", 
+				"angularSpeedX", "angularSpeedY", "angularSpeedZ", 
+				"timeStampRocket", "timeStampBase"};
+		
+		csvBeanWriter.writeHeader(header);
+		
+		for (RocketData rocketData: rocketDataList) {
+			csvBeanWriter.write(rocketData, fieldMapping);
+		}
+		
+	}
 }
