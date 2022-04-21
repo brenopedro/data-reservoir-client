@@ -9,10 +9,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
 import com.reservoir.datareservoir.client.domain.service.RocketDataService;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Controller
 @RequestMapping("/rocket/position-gps-y")
 public class RocketPositionGpsYController {
 
+	private final RocketDataService rocketDataService;
+	
     @GetMapping
     public ModelAndView rocketPositionGpsY() {
         return new ModelAndView("rocket/tabs/positionGpsY/positionGpsY");
@@ -21,28 +26,28 @@ public class RocketPositionGpsYController {
     @GetMapping("/table")
     public ModelAndView getRocketPositionGpsYTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/tabs/positionGpsY/table");
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/table")
     public ModelAndView postRocketPositionGpsYTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/tabs/positionGpsY/table");
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         return modelAndView;
     }
 
     @GetMapping("/graph")
     public ModelAndView getRocketPositionGpsYGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/tabs/positionGpsY/graph");
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/graph")
     public ModelAndView postRocketPositionGpsYGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/tabs/positionGpsY/graph");
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         return modelAndView;
     }
 }

@@ -2,19 +2,17 @@ package com.reservoir.datareservoir.client.exceptionhandler;
 
 import java.net.ConnectException;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
 public class ClientExceptionHandler extends ResponseEntityExceptionHandler {
 	
-	// TODO: create exception handlers for another exceptions and resolve for a page
-	
 	@ExceptionHandler(ConnectException.class)
-	public ResponseEntity<String> handleConnectException(ConnectException e) {
-		return ResponseEntity.badRequest().body(e.getMessage());
+	public ModelAndView handleConnectException(ConnectException e) {
+		return new ModelAndView("/error/connect");
 	}
 
 }

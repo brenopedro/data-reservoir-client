@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,13 +21,16 @@ import com.reservoir.datareservoir.client.domain.service.DroneDataService;
 @Controller
 @RequestMapping("/drone")
 public class DroneController {
+
+	@Autowired
+	private DroneDataService droneDataService;
 	
 	private DroneData[] droneDataList;
 
     @GetMapping
     public ModelAndView getDrone(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/droneHome");
-        droneDataList = DroneDataService.getDroneData(propertiesFilter);
+        droneDataList = droneDataService.getDroneData(propertiesFilter);
         modelAndView.addObject("droneData", droneDataList);
         return modelAndView;
     }
@@ -34,7 +38,7 @@ public class DroneController {
     @PostMapping
     public ModelAndView postDrone(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/droneHome");
-        droneDataList = DroneDataService.getDroneData(propertiesFilter);
+        droneDataList = droneDataService.getDroneData(propertiesFilter);
         modelAndView.addObject("droneData", droneDataList);
         return modelAndView;
     }
@@ -48,7 +52,7 @@ public class DroneController {
     	response.setHeader(headerKey, headerValue);
     	
     	ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-		DroneDataService.downloadCsv(csvBeanWriter, droneDataList);
+		droneDataService.downloadCsv(csvBeanWriter, droneDataList);
 		csvBeanWriter.close();
     	
     }

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,12 +22,15 @@ import com.reservoir.datareservoir.client.domain.service.RocketDataService;
 @RequestMapping("/rocket")
 public class RocketController {
 	
+	@Autowired
+	private RocketDataService rocketDataService;
+	
 	private RocketData[] rocketDataList;
 
     @GetMapping
     public ModelAndView getRocket(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/rocketHome");
-        rocketDataList = RocketDataService.getRocketData(propertiesFilter);
+        rocketDataList = rocketDataService.getRocketData(propertiesFilter);
         modelAndView.addObject("rocketData", rocketDataList);
         return modelAndView;
     }
@@ -34,7 +38,7 @@ public class RocketController {
     @PostMapping
     public ModelAndView postRocket(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/rocketHome");
-        rocketDataList = RocketDataService.getRocketData(propertiesFilter);
+        rocketDataList = rocketDataService.getRocketData(propertiesFilter);
         modelAndView.addObject("rocketData", rocketDataList);
         return modelAndView;
     }
@@ -48,7 +52,7 @@ public class RocketController {
     	response.setHeader(headerKey, headerValue);
     	
     	ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-		RocketDataService.downloadCsv(csvBeanWriter, rocketDataList);
+		rocketDataService.downloadCsv(csvBeanWriter, rocketDataList);
 		csvBeanWriter.close();
     	
     }

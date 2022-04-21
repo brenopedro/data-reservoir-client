@@ -9,10 +9,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
 import com.reservoir.datareservoir.client.domain.service.DroneDataService;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Controller
 @RequestMapping("/drone/battery-voltage")
 public class DroneBatteryVoltageController {
 
+	private final DroneDataService droneDataService;
+	
     @GetMapping
     public ModelAndView droneBatteryVoltage() {
         return new ModelAndView("drone/tabs/batteryVoltage/batteryVoltage");
@@ -21,28 +26,28 @@ public class DroneBatteryVoltageController {
     @GetMapping("/table")
     public ModelAndView getDroneBatteryVoltageTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/tabs/batteryVoltage/table");
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/table")
     public ModelAndView postDroneBatteryVoltageTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/tabs/batteryVoltage/table");
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
         return modelAndView;
     }
 
     @GetMapping("/graph")
     public ModelAndView getDroneBatteryVoltageGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/tabs/batteryVoltage/graph");
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/graph")
     public ModelAndView postDroneBatteryVoltageGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/tabs/batteryVoltage/graph");
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
         return modelAndView;
     }
 }

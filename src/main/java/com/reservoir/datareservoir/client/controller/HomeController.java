@@ -11,16 +11,23 @@ import com.reservoir.datareservoir.client.domain.service.CubeDataService;
 import com.reservoir.datareservoir.client.domain.service.DroneDataService;
 import com.reservoir.datareservoir.client.domain.service.RocketDataService;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Controller
 @RequestMapping("/")
 public class HomeController {
+	
+	private final CubeDataService cubeDataService;
+	private final DroneDataService droneDataService;
+	private final RocketDataService rocketDataService;
 
     @GetMapping
     public ModelAndView getHome(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("home");
-        modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("cubeData", cubeDataService.getCubeData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         
         return modelAndView;
     }
@@ -28,10 +35,16 @@ public class HomeController {
     @PostMapping
     public ModelAndView postHome(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("home");
-        modelAndView.addObject("cubeData", CubeDataService.getCubeData(propertiesFilter));
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("cubeData", cubeDataService.getCubeData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         
+        return modelAndView;
+    }
+
+    @GetMapping("error")
+    public ModelAndView handleError() {
+        ModelAndView modelAndView = new ModelAndView("/error/error");
         return modelAndView;
     }
 

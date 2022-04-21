@@ -9,10 +9,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
 import com.reservoir.datareservoir.client.domain.service.DroneDataService;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Controller
 @RequestMapping("/drone/position-gps-y")
 public class DronePositionGpsYController {
 
+	private final DroneDataService droneDataService;
+	
     @GetMapping
     public ModelAndView dronePositionGpsY() {
         return new ModelAndView("drone/tabs/positionGpsY/positionGpsY");
@@ -21,28 +26,28 @@ public class DronePositionGpsYController {
     @GetMapping("/table")
     public ModelAndView getDronePositionGpsYTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/tabs/positionGpsY/table");
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/table")
     public ModelAndView postDronePositionGpsYTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/tabs/positionGpsY/table");
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
         return modelAndView;
     }
 
     @GetMapping("/graph")
     public ModelAndView getDronePositionGpsYGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/tabs/positionGpsY/graph");
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/graph")
     public ModelAndView postDronePositionGpsYGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/tabs/positionGpsY/graph");
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
         return modelAndView;
     }
 }

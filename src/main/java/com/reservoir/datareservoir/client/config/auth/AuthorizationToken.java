@@ -1,42 +1,49 @@
 package com.reservoir.datareservoir.client.config.auth;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.reservoir.datareservoir.client.config.properties.AuthorizationProperties;
 import com.reservoir.datareservoir.client.domain.model.TokenModel;
 
+@Component
 public class AuthorizationToken {
 
-    private static final String TOKEN_PATH = "http://localhost:8081/oauth/token";
+	@Autowired
+	private AuthorizationProperties authorizationProperties;
+	
+    private final String TOKEN_PATH = "http://localhost:8081/oauth/token";
 
-    private static String accessToken;
-    private static TokenModel tokenModel;
-
-    public static String getAccessToken(boolean expired) {
+    private String accessToken;
+    private TokenModel tokenModel;
+    
+    public String getAccessToken(boolean expired) {
         if (accessToken == null || expired) {
             accessToken = getNewToken();
         }
         return accessToken;
     }
-
-    private static String getNewToken() {
+    
+    private String getNewToken() {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("grant_type", "password");
-        map.add("username", "brenoAdmin");
-        map.add("password", "123");
+        map.add("username", authorizationProperties.getAuthUsername());
+        map.add("password", authorizationProperties.getAuthUsername());
 
         return getToken(map);
     }
 
-    private static String getToken(MultiValueMap<String, String> map) {
+    private String getToken(MultiValueMap<String, String> map) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setBasicAuth("admin-client", "admin123");
+        headers.setBasicAuth(authorizationProperties.getAuthClientUsername(), authorizationProperties.getAuthClientPassword());
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);

@@ -9,10 +9,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
 import com.reservoir.datareservoir.client.domain.service.RocketDataService;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Controller
 @RequestMapping("/rocket/acceleration")
 public class RocketAccelerationController {
 
+	private final RocketDataService rocketDataService;
+	
     @GetMapping
     public ModelAndView rocketAcceleration() {
         return new ModelAndView("rocket/tabs/acceleration/acceleration");
@@ -21,28 +26,28 @@ public class RocketAccelerationController {
     @GetMapping("/table")
     public ModelAndView getRocketAccelerationTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/tabs/acceleration/table");
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/table")
     public ModelAndView postRocketAccelerationTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/tabs/acceleration/table");
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         return modelAndView;
     }
 
     @GetMapping("/graph")
     public ModelAndView getRocketAccelerationGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/tabs/acceleration/graph");
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/graph")
     public ModelAndView postRocketAccelerationGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/tabs/acceleration/graph");
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         return modelAndView;
     }
 }

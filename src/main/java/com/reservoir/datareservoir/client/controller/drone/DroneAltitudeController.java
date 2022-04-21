@@ -9,10 +9,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
 import com.reservoir.datareservoir.client.domain.service.DroneDataService;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Controller
 @RequestMapping("/drone/altitude")
 public class DroneAltitudeController {
 
+	private final DroneDataService droneDataService;
+	
     @GetMapping
     public ModelAndView droneAltitude() {
         return new ModelAndView("drone/tabs/altitude/altitude");
@@ -21,28 +26,28 @@ public class DroneAltitudeController {
     @GetMapping("/table")
     public ModelAndView getDroneAltitudeTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/tabs/altitude/table");
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/table")
     public ModelAndView postDroneAltitudeTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/tabs/altitude/table");
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
         return modelAndView;
     }
 
     @GetMapping("/graph")
     public ModelAndView getDroneAltitudeGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/tabs/altitude/graph");
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/graph")
     public ModelAndView postDroneAltitudeGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("drone/tabs/altitude/graph");
-        modelAndView.addObject("droneData", DroneDataService.getDroneData(propertiesFilter));
+        modelAndView.addObject("droneData", droneDataService.getDroneData(propertiesFilter));
         return modelAndView;
     }
 }

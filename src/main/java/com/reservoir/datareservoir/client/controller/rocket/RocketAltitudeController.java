@@ -9,10 +9,15 @@ import org.springframework.web.servlet.ModelAndView;
 import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
 import com.reservoir.datareservoir.client.domain.service.RocketDataService;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 @Controller
 @RequestMapping("/rocket/altitude")
 public class RocketAltitudeController {
 
+	private final RocketDataService rocketDataService;
+	
     @GetMapping
     public ModelAndView rocketAltitude() {
         return new ModelAndView("rocket/tabs/altitude/altitude");
@@ -21,28 +26,28 @@ public class RocketAltitudeController {
     @GetMapping("/table")
     public ModelAndView getRocketAltitudeTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/tabs/altitude/table");
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/table")
     public ModelAndView postRocketAltitudeTable(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/tabs/altitude/table");
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         return modelAndView;
     }
 
     @GetMapping("/graph")
     public ModelAndView getRocketAltitudeGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/tabs/altitude/graph");
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         return modelAndView;
     }
 
     @PostMapping("/graph")
     public ModelAndView postRocketAltitudeGraph(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("rocket/tabs/altitude/graph");
-        modelAndView.addObject("rocketData", RocketDataService.getRocketData(propertiesFilter));
+        modelAndView.addObject("rocketData", rocketDataService.getRocketData(propertiesFilter));
         return modelAndView;
     }
 }

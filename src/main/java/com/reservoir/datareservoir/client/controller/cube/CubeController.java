@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,13 +21,16 @@ import com.reservoir.datareservoir.client.domain.service.CubeDataService;
 @Controller
 @RequestMapping("/cube")
 public class CubeController {
+
+	@Autowired
+	private CubeDataService cubeDataService;
 	
 	private CubeData[] cubeDataList;
 
     @GetMapping
     public ModelAndView getCube(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/cubeHome");
-        cubeDataList = CubeDataService.getCubeData(propertiesFilter);
+        cubeDataList = cubeDataService.getCubeData(propertiesFilter);
         modelAndView.addObject("cubeData", cubeDataList);
         return modelAndView;
     }
@@ -34,7 +38,7 @@ public class CubeController {
     @PostMapping
     public ModelAndView postCube(PropertiesFilter propertiesFilter) {
         ModelAndView modelAndView = new ModelAndView("cube/cubeHome");
-        cubeDataList = CubeDataService.getCubeData(propertiesFilter);
+        cubeDataList = cubeDataService.getCubeData(propertiesFilter);
         modelAndView.addObject("cubeData", cubeDataList);
         return modelAndView;
     }
@@ -48,7 +52,7 @@ public class CubeController {
     	response.setHeader(headerKey, headerValue);
     	
     	ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-		CubeDataService.downloadCsv(csvBeanWriter, cubeDataList);
+		cubeDataService.downloadCsv(csvBeanWriter, cubeDataList);
 		csvBeanWriter.close();
     	
     }

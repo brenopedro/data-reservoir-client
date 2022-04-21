@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -17,10 +19,14 @@ import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
 import com.reservoir.datareservoir.client.domain.model.RocketData;
 import com.reservoir.datareservoir.client.domain.model.UrlEnum;
 
+@Component
 public class RocketDataService {
 
-    public static RocketData[] getRocketData(PropertiesFilter propertiesFilter) {
-        String accessToken = AuthorizationToken.getAccessToken(false);
+	@Autowired
+	private AuthorizationToken authorizationToken;
+	
+    public RocketData[] getRocketData(PropertiesFilter propertiesFilter) {
+        String accessToken = authorizationToken.getAccessToken(false);
         RocketData[] rocketData;
         
         Map<String, String> params = new HashMap<>();
@@ -40,7 +46,7 @@ public class RocketDataService {
             rocketData = new RestTemplate().exchange(uri, HttpMethod.GET, 
             		request, RocketData[].class, params).getBody();
         } catch (HttpClientErrorException e) {
-            accessToken = AuthorizationToken.getAccessToken(true);
+            accessToken = authorizationToken.getAccessToken(true);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setBearerAuth(accessToken);
@@ -54,7 +60,7 @@ public class RocketDataService {
         return rocketData;
     }
 
-	public static void downloadCsv(ICsvBeanWriter csvBeanWriter, RocketData[] rocketDataList) throws IOException {
+	public void downloadCsv(ICsvBeanWriter csvBeanWriter, RocketData[] rocketDataList) throws IOException {
 		String[] header = {"ID", "Altitude", "External Temperature", "Acceleration", 
 				"Euler Angle X", "Euler Angle Y", "Euler Angle Z", 
 				"Position Gps X", "Position Gps Y", "Position Gps Z", 

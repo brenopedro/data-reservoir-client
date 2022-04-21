@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Component
 @Setter
 @Getter
-@ConfigurationProperties("data-reservoir.security")
+@ConfigurationProperties("datareservoir.security")
 public class SecurityProperties {
 
     @NotNull
