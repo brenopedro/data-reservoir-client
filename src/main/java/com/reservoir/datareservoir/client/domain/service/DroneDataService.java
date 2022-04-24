@@ -17,13 +17,16 @@ import org.supercsv.io.ICsvBeanWriter;
 import com.reservoir.datareservoir.client.config.auth.AuthorizationToken;
 import com.reservoir.datareservoir.client.domain.model.DroneData;
 import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
-import com.reservoir.datareservoir.client.domain.model.UrlEnum;
+import com.reservoir.datareservoir.client.domain.service.properties.UrlProperties;
 
 @Component
 public class DroneDataService {
 	
 	@Autowired
 	private AuthorizationToken authorizationToken;
+	
+	@Autowired
+	private UrlProperties urlProperties;
 
     public DroneData[] getDroneData(PropertiesFilter propertiesFilter) {
         String accessToken = authorizationToken.getAccessToken(false);
@@ -33,7 +36,7 @@ public class DroneDataService {
         params.put("fromTimeStamp", propertiesFilter.getFromTimeStamp());
         params.put("toTimeStamp", propertiesFilter.getToTimeStamp());
         
-        String uri = UriComponentsBuilder.fromHttpUrl(UrlEnum.COLLECTION_DRONE.getUrl())
+        String uri = UriComponentsBuilder.fromHttpUrl(urlProperties.getDroneData())
                 .queryParam("fromTimeStamp", "{fromTimeStamp}")
                 .queryParam("toTimeStamp", "{toTimeStamp}")
                 .encode().toUriString();

@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.reservoir.datareservoir.client.config.properties.AuthorizationProperties;
 import com.reservoir.datareservoir.client.domain.model.TokenModel;
+import com.reservoir.datareservoir.client.domain.service.properties.UrlProperties;
 
 @Component
 public class AuthorizationToken {
@@ -20,7 +21,8 @@ public class AuthorizationToken {
 	@Autowired
 	private AuthorizationProperties authorizationProperties;
 	
-    private final String TOKEN_PATH = "http://localhost:8081/oauth/token";
+	@Autowired
+    private UrlProperties urlProperties;
 
     private String accessToken;
     private TokenModel tokenModel;
@@ -36,7 +38,7 @@ public class AuthorizationToken {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("grant_type", "password");
         map.add("username", authorizationProperties.getAuthUsername());
-        map.add("password", authorizationProperties.getAuthUsername());
+        map.add("password", authorizationProperties.getAuthPassword());
 
         return getToken(map);
     }
@@ -48,7 +50,7 @@ public class AuthorizationToken {
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
 
-        ResponseEntity<TokenModel> response = new RestTemplate().exchange(TOKEN_PATH, HttpMethod.POST, request,
+        ResponseEntity<TokenModel> response = new RestTemplate().exchange(urlProperties.getAuthorizationUrl(), HttpMethod.POST, request,
                 TokenModel.class);
         tokenModel = response.getBody();
         return tokenModel.getAccess_token();

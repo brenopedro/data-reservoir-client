@@ -17,13 +17,16 @@ import org.supercsv.io.ICsvBeanWriter;
 import com.reservoir.datareservoir.client.config.auth.AuthorizationToken;
 import com.reservoir.datareservoir.client.domain.model.PropertiesFilter;
 import com.reservoir.datareservoir.client.domain.model.RocketData;
-import com.reservoir.datareservoir.client.domain.model.UrlEnum;
+import com.reservoir.datareservoir.client.domain.service.properties.UrlProperties;
 
 @Component
 public class RocketDataService {
 
 	@Autowired
 	private AuthorizationToken authorizationToken;
+	
+	@Autowired
+	private UrlProperties urlProperties;
 	
     public RocketData[] getRocketData(PropertiesFilter propertiesFilter) {
         String accessToken = authorizationToken.getAccessToken(false);
@@ -33,7 +36,7 @@ public class RocketDataService {
         params.put("fromTimeStamp", propertiesFilter.getFromTimeStamp());
         params.put("toTimeStamp", propertiesFilter.getToTimeStamp());
 
-        String uri = UriComponentsBuilder.fromHttpUrl(UrlEnum.COLLECTION_ROCKET.getUrl())
+        String uri = UriComponentsBuilder.fromHttpUrl(urlProperties.getRocketData())
                 .queryParam("fromTimeStamp", "{fromTimeStamp}")
                 .queryParam("toTimeStamp", "{toTimeStamp}")
                 .encode().toUriString();
